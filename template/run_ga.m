@@ -32,6 +32,8 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
         % initialize population
         Chrom=zeros(NIND,NVAR);
         for row=1:NIND
+            %First line : Adjacency representation
+            %Second line : Path representation
         	Chrom(row,:)=path2adj(randperm(NVAR));
             %Chrom(row,:)=randperm(NVAR);
         end
@@ -62,7 +64,7 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
                 stop_counter = 0;
             end
             prev_fitness = minimum;
-            %%%
+            %%%%%%%%%%%%%%%%%%
             
             mean_fits(gen+1)=mean(ObjV);
             worst(gen+1)=max(ObjV);
@@ -71,6 +73,7 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
                     break;
                 end
             end
+            
             
             visualizeTSP(x,y,adj2path(Chrom(t,:)), minimum, ah1, gen, best, mean_fits, worst, ah2, ObjV, NIND, ah3);
 

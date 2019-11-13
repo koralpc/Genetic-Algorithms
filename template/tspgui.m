@@ -13,7 +13,7 @@ PR_CROSS=.95;     % probability of crossover
 PR_MUT=.05;       % probability of mutation
 STOP_THRESHOLD = 0.05; %Absolute fitness increment for stopping criterion
 LOCALLOOP=0;      % local loop removal
-CROSSOVER = 'xalt_edges';  % default crossover operator
+CROSSOVER = 'pmx';  % default crossover operator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % read an existing population
