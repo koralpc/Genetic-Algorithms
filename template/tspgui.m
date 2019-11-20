@@ -13,7 +13,9 @@ PR_CROSS=.95;     % probability of crossover
 PR_MUT=.05;       % probability of mutation
 STOP_THRESHOLD = 0.05; %Absolute fitness increment for stopping criterion
 LOCALLOOP=0;      % local loop removal
-CROSSOVER = 'pmx';  % default crossover operator
+CROSSOVER = 'xalt_edges';  % default crossover operator
+MUTATION = 'inversion'; % default mutation operator
+SELECTION = 'sus'; % default selection operator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % read an existing population
@@ -96,7 +98,9 @@ crosssliderv = uicontrol(ph,'Style','text','String',round(PR_CROSS*100),'Positio
 elitslidertxt = uicontrol(ph,'Style','text','String','% elite','Position',[0 80 130 20]);
 elitslider = uicontrol(ph,'Style','slider','Max',100,'Min',0,'Value',round(ELITIST*100),'Sliderstep',[0.01 0.05],'Position',[130 80 150 20],'Callback',@elitslider_Callback);
 elitsliderv = uicontrol(ph,'Style','text','String',round(ELITIST*100),'Position',[280 80 50 20]);
-crossover = uicontrol(ph,'Style','popupmenu', 'String',{'xalt_edges'}, 'Value',1,'Position',[10 50 130 20],'Callback',@crossover_Callback);
+crossover = uicontrol(ph,'Style','popupmenu', 'String',{'xalt_edges','pmx'}, 'Value',1,'Position',[10 50 80 20],'Callback',@crossover_Callback);
+mutation = uicontrol(ph,'Style','popupmenu', 'String',{'inversion','interchange','scramble'}, 'Value',1,'Position',[100 50 80 20],'Callback',@mutation_Callback);
+selection = uicontrol(ph,'Style','popupmenu', 'String',{'sus','tournament'}, 'Value',1,'Position',[190 50 80 20],'Callback',@selection_Callback);
 %inputbutton = uicontrol(ph,'Style','pushbutton','String','Input','Position',[55 10 70 30],'Callback',@inputbutton_Callback);
 runbutton = uicontrol(ph,'Style','pushbutton','String','START','Position',[0 10 50 30],'Callback',@runbutton_Callback);
 fitness_thresholdv = uicontrol(ph,'Style','edit','String',0.05,'Position',[280 50 50 20],'Callback',@stopcriterion_Callback);
@@ -173,6 +177,18 @@ set(fh,'Visible','on');
         CROSSOVER = crossovers(crossover_value);
         CROSSOVER = CROSSOVER{1};
     end
+    function mutation_Callback(hObject,eventdata)
+        mutation_value = get(hObject,'Value');
+        mutations = get(hObject,'String');
+        MUTATION = mutations(mutation_value);
+        MUTATION = MUTATION{1};
+    end
+    function selection_Callback(hObject,eventdata)
+        selection_value = get(hObject,'Value');
+        selections = get(hObject,'String');
+        SELECTION = selections(selection_value);
+        SELECTION = SELECTION{1};
+    end
     function runbutton_Callback(hObject,eventdata)
         %set(ncitiesslider, 'Visible','off');
         set(nindslider,'Visible','off');
@@ -181,7 +197,7 @@ set(fh,'Visible','on');
         set(crossslider,'Visible','off');
         set(elitslider,'Visible','off');
        
-        run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
+        run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
         
         end_run();
     end

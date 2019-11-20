@@ -1,0 +1,9 @@
+1 - PMX is definitely better than xalt_edges(Shows more improvement in bigger datasets)
+2 - Tournament selection (For both xover methods) is better than SUS by far
+3 - Inversion mutation currently works best with all xovers, TODO : Explore when scramble is better than interchange
+4 - PMX works best with both high xover and high mutation - xalt works best with low xover and high mutation. 
+Both with tournament selection, this selection has the most impact!
+5- Tournament selection converges much faster
+6- PMX is much better with SUS compared to XALT
+7- PMX also converges faster than XALT(Test without mutation)
+8- The impact of PMX and Tournament can be better seen in larger datasets!

@@ -26,7 +26,9 @@ NewChrom=OldChrom;
 
 for r=1:rows
 	if rand<MutOpt
-		NewChrom(r,:) = feval(MUT_F, OldChrom(r,:),2);
+        %DON'T MODIFY THIS EVER -> THE NUMBER 1!!!!
+        %IT WAS 2 BY DEFAULT
+		NewChrom(r,:) = feval(MUT_F, OldChrom(r,:),1);
 	end
 end
 
