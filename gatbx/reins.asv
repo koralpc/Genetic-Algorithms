@@ -91,7 +91,7 @@ function [Chrom, ObjVCh] = reins(Chrom, SelCh, SUBPOP, InsOpt, ObjVCh, ObjVSel);
    
    if (INSR < 0 | INSR > 1), error('Parameter for insertion rate must be a scalar in [0, 1]'); end
    if (INSR < 1 & IsObjVSel ~= 1), error('For selection of offspring ObjVSel is needed'); end 
-   if (Select ~= 0 & Select ~= 1 & Select ~= 2 & Select ~= 3), error('Parameter for selection method must be 0 or 1'); end
+   if (Select ~= 0 & Select ~= 1), error('Parameter for selection method must be 0 or 1'); end
    if (Select == 1 & IsObjVCh == 0), error('ObjVCh for fitness-based exchange needed'); end
 
    if INSR == 0, return; end
@@ -102,17 +102,8 @@ function [Chrom, ObjVCh] = reins(Chrom, SelCh, SUBPOP, InsOpt, ObjVCh, ObjVSel);
       % Calculate positions in old subpopulation, where offspring are inserted
          if Select == 1    % fitness-based reinsertion
             [Dummy, ChIx] = sort(-ObjVCh((irun-1)*NIND+1:irun*NIND));
-            
-         elseif Select == 2 % Mu + Lambda Selection
-             ObjT = [ObjVCh;ObjVSel];
-             [ObjT,Objidx] = sort(ObjT);
-             selected_idx = Objidx(1:NIND);
-             selected_parent = selected_idx(selected_idx <= NIND);
-             selected_child = selected_idx(selected_idx > NIND) - NIND;
+         else if Select == 2
              
-             Chrom = [Chrom(selected_parent,:) ; SelCh(selected_child,:)];
-             ObjVCh = [ObjVCh(selected_parent) ; ObjVSel(selected_child)];
-             return
          else               % uniform reinsertion
             [Dummy, ChIx] = sort(rand(NIND,1));
          end

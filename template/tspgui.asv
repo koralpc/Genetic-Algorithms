@@ -16,7 +16,6 @@ LOCALLOOP=0;      % local loop removal
 CROSSOVER = 'xalt_edges';  % default crossover operator
 MUTATION = 'inversion'; % default mutation operator
 SELECTION = 'sus'; % default selection operator
-SURVIVOR_STR = 'Elitism'
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % read an existing population
@@ -197,17 +196,8 @@ set(fh,'Visible','on');
         SURVIVOR_STR = selections(selection_value);
         SURVIVOR_STR = SURVIVOR_STR{1};
         switch SURVIVOR_STR
-            case 'Uniform'
-                SURVIVOR_STR = 0;
-            case 'Elitism'
-                SURVIVOR_STR = 1;
-            case 'Mu+Lambda'
-                SURVIVOR_STR = 2;
-            case 'Round-Robin'
-                SURVIVOR_STR = 3;
-            otherwise
-                SURVIVOR_STR = 1;
-        end
+            case SURIVOR_ST
+            
     end
     function runbutton_Callback(hObject,eventdata)
         %set(ncitiesslider, 'Visible','off');
@@ -217,7 +207,7 @@ set(fh,'Visible','on');
         set(crossslider,'Visible','off');
         set(elitslider,'Visible','off');
        
-        run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
+        run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
         
         end_run();
     end

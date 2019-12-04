@@ -1,4 +1,4 @@
-function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,STOP_THRESHOLD, LOCALLOOP, ah1, ah2, ah3)
+function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR,STOP_THRESHOLD, LOCALLOOP, ah1, ah2, ah3)
 % usage: run_ga(x, y, 
 %               NIND, MAXGEN, NVAR, 
 %               ELITIST, STOP_PERCENTAGE, 
@@ -16,10 +16,11 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
 % CROSSOVER: the crossover operator
 % MUTATION: the mutation operator
 % SELECTION : the selection operator
+% SURVIVOR_STR : Survivor selection strategy
 % STOP_THRESHOLD : fitness threshold value for stopping criterion
 % calculate distance matrix between each pair of cities
 % ah1, ah2, ah3: axes handles to visualise tsp
-{NIND MAXGEN NVAR ELITIST STOP_PERCENTAGE PR_CROSS PR_MUT CROSSOVER STOP_THRESHOLD LOCALLOOP}
+%{NIND MAXGEN NVAR ELITIST STOP_PERCENTAGE PR_CROSS PR_MUT CROSSOVER STOP_THRESHOLD LOCALLOOP}
 
 
         GGAP = 1 - ELITIST;
@@ -92,7 +93,7 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
             %evaluate offspring, call objective function
         	ObjVSel = tspfun(SelCh,Dist);
             %reinsert offspring into population
-        	[Chrom ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
+        	[Chrom ObjV]=reins(Chrom,SelCh,1,SURVIVOR_STR,ObjV,ObjVSel);
             
             Chrom = tsp_ImprovePopulation(NIND, NVAR, Chrom,LOCALLOOP,Dist);
         	%increment generation counter
