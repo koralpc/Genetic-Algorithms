@@ -117,8 +117,8 @@ set(fh,'Visible','on');
 
     function datasetpopup_Callback(hObject,eventdata)
         dataset_value = get(hObject,'Value');
+        DATASET_GLOBAL = dataset_value;
         dataset = datasets{dataset_value};
-        DATASET_GLOBAL = dataset;
         % load the dataset
         %Switch data scaling
         data = load(['datasets/' dataset]);
@@ -226,21 +226,16 @@ set(fh,'Visible','on');
         set(crossslider,'Visible','off');
         set(elitslider,'Visible','off');
        
-        Test_count = 5;
-        min_fit = zeros(1,Test_count);
-        for j = 1 : Test_count
+        min_fit = zeros(1,5);
+        for j = 1 : 5
         min_fit(j) = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR_INT, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
         end
         fileID = fopen('../test_results.txt','a');
-        fprintf(fileID,'%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d %d %d %d %d\n', ...
-        DATASET_GLOBAL,num2str(NIND),num2str(MAXGEN), ...
-        MUTATION,num2str(PR_MUT),CROSSOVER,num2str(PR_CROSS),SELECTION,SURVIVOR_STR,num2str(ELITIST), ...
-        num2str(LOCALLOOP),min_fit);
-        fclose(fileID);
+        fprintf(fileID,'%s,%s,%s,%s,%s,%s,%s,%s,%s' ,
+        DATASET_GLOBAL,num2str(NIND),num2str(MAXGEN),
+        MUTATION,num2str(PR_MUT),CROSSOVER,num2str(PR_CROSS),SELECTION,SURVIV )
+        fclose(fileID)
         end_run();
-        figure
-        plotAllResults('../test_results.txt')
-        
     end
 
     function stopcriterion_Callback(hObject,eventdata)

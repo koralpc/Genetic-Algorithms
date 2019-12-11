@@ -1,4 +1,4 @@
-function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR,STOP_THRESHOLD, LOCALLOOP, ah1, ah2, ah3)
+function min_fit = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR,STOP_THRESHOLD, LOCALLOOP, ah1, ah2, ah3)
 % usage: run_ga(x, y, 
 %               NIND, MAXGEN, NVAR, 
 %               ELITIST, STOP_PERCENTAGE, 
@@ -125,6 +125,6 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
             end
         	%increment generation counter
         	gen=gen+1;
-            %min_fit = minimum
         end
+        min_fit = minimum;
 end

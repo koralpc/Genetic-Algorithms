@@ -1,0 +1,5 @@
+Dataset_name,Individuals,Gen_count,Mut_str,Mut_count,Xover_str,Xover_count,Parent_str,Survivor_Str,Survivor_count,Loop_detection,All_result
+
+rondrit016.tsp,50,10,inversion,0.05,xalt_edges,0.95,sus,Elitism,0.05,0,1.846480e+03 2.309530e+03
+rondrit016.tsp,50,10,inversion,0.05,xalt_edges,0.95,sus,Elitism,0.05,0,1.939846e+03 2.177446e+03
+rondrit016.tsp,50,10,inversion,0.05,xalt_edges,0.95,sus,Elitism,0.05,0,2.150095e+03 1.787050e+03
