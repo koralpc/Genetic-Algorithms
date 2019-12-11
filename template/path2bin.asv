@@ -1,0 +1,9 @@
+
+function Binary = path2bin(Path)
+    Bitstring_len = ceil(log2(size(Path,2)));
+	Binary=zeros(1,size(Path,2));
+    Path = Path - 1 ;
+	for t=1:size(Path,2)
+		Binary(t:t*Bitstring_len)=dec2bin(Path(t),Bitstring_len);
+	end
+

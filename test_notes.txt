@@ -7,3 +7,13 @@ Both with tournament selection, this selection has the most impact!
 6- PMX is much better with SUS compared to XALT
 7- PMX also converges faster than XALT(Test without mutation)
 8- The impact of PMX and Tournament can be better seen in larger datasets!
+
+00 00 00 00
+
+11 11 11 00
+
+00 22 22 11
+
+11 00 33 22
+
+22 11 00 33

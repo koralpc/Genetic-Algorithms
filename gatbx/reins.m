@@ -113,6 +113,25 @@ function [Chrom, ObjVCh] = reins(Chrom, SelCh, SUBPOP, InsOpt, ObjVCh, ObjVSel);
              Chrom = [Chrom(selected_parent,:) ; SelCh(selected_child,:)];
              ObjVCh = [ObjVCh(selected_parent) ; ObjVSel(selected_child)];
              return
+             
+         elseif Select == 3 % Round-Robin Tournament Selection
+             ObjT = [ObjVCh;ObjVSel];
+             Total_participants = size(ObjT,1);
+             Win_count = zeros(1,Total_participants); 
+             for i = 1:length(ObjT)
+                 participant_array = randi(Total_participants,10,1);
+                 Win_count(i) = length(find(ObjT(i) > ObjT(participant_array)));
+             end
+             [Winners,Winneridx] = sort(Win_count);
+             
+             selected_idx = Winneridx(1:NIND);
+             
+             selected_parent = selected_idx(selected_idx <= NIND);
+             selected_child = selected_idx(selected_idx > NIND) - NIND;
+             
+             Chrom = [Chrom(selected_parent,:) ; SelCh(selected_child,:)];
+             ObjVCh = [ObjVCh(selected_parent) ; ObjVSel(selected_child)];
+             return
          else               % uniform reinsertion
             [Dummy, ChIx] = sort(rand(NIND,1));
          end
