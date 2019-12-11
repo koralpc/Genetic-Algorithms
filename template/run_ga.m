@@ -24,6 +24,7 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
 
 
         GGAP = 1 - ELITIST;
+        BIT_STR_LEN = ceil(log2(NVAR));
         mean_fits=zeros(1,MAXGEN+1);
         worst=zeros(1,MAXGEN+1);
         Dist=zeros(NVAR,NVAR);
@@ -34,17 +35,26 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
         end
         % initialize population
         Chrom=zeros(NIND,NVAR);
+        Chrom_binary =[];
         for row=1:NIND
             %First line : Adjacency representation
             %Second line : Path representation
         	Chrom(row,:)=path2adj(randperm(NVAR));
             %Chrom(row,:)=randperm(NVAR);
         end
+        Chrom1 = Chrom;
         gen=0;
         % number of individuals of equal fitness needed to stop
         stopN=ceil(STOP_PERCENTAGE*NIND);
         % evaluate initial population
         ObjV = tspfun(Chrom,Dist);
+      for row=1:NIND
+            %First line : Adjacency representation
+            %Second line : Path representation
+        	Chrom(row,:)=adj2path(Chrom(row,:));
+            Chrom_binary = [Chrom_binary;path2bin(Chrom(row,:),BIT_STR_LEN)];
+            %Chrom(row,:)=randperm(NVAR);
+        end
         best=zeros(1,MAXGEN);
         %%%%STOPPING CRITERION%%%%
         stopping_gen_threshold = MAXGEN/5; %% Play with the value(GUI) 
@@ -78,11 +88,20 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
             end
             
             
-            visualizeTSP(x,y,adj2path(Chrom(t,:)), minimum, ah1, gen, best, mean_fits, worst, ah2, ObjV, NIND, ah3);
+            visualizeTSP(x,y,bin2path(Chrom_binary(t,:),BIT_STR_LEN), minimum, ah1, gen, best, mean_fits, worst, ah2, ObjV, NIND, ah3);
 
             if (sObjV(stopN)-sObjV(1) <= 1e-15)
                   break;
-            end          
+            end
+            
+            for row=1:NIND
+                %First line : Adjacency representation
+                %Second line : Path representation
+                Chrom(row,:)=bin2path(Chrom_binary(row,:),BIT_STR_LEN);
+                Chrom(row,:)=path2adj(Chrom(row,:));
+                %Chrom(row,:)=randperm(NVAR);
+            end
+            
         	%assign fitness values to entire population
         	FitnV=ranking(ObjV);
         	%select individuals for breeding
@@ -96,6 +115,14 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
         	[Chrom ObjV]=reins(Chrom,SelCh,1,SURVIVOR_STR,ObjV,ObjVSel);
             
             Chrom = tsp_ImprovePopulation(NIND, NVAR, Chrom,LOCALLOOP,Dist);
+            
+            Chrom_binary = [];
+            for row=1:NIND
+                Chrom_path(row,:)=adj2path(Chrom(row,:));
+                Chrom_binary = [Chrom_binary;path2bin(Chrom_path(row,:),BIT_STR_LEN)];
+            
+            %Chrom(row,:)=randperm(NVAR);
+            end
         	%increment generation counter
         	gen=gen+1;
             %min_fit = minimum

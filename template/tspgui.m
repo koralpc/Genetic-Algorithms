@@ -17,6 +17,7 @@ CROSSOVER = 'xalt_edges';  % default crossover operator
 MUTATION = 'inversion'; % default mutation operator
 SELECTION = 'sus'; % default selection operator
 SURVIVOR_STR = 'Elitism'
+SURVIVOR_STR_INT = 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % read an existing population
@@ -57,7 +58,10 @@ end
 
 % start with first dataset
 data = load(['datasets/' datasets{1}]);
+
 x=data(:,1)/max([data(:,1);data(:,2)]);y=data(:,2)/max([data(:,1);data(:,2)]);
+%x = data(:,1);
+%y= data(:,2);
 NVAR=size(data,1);
 
 datasets
@@ -105,7 +109,7 @@ selection = uicontrol(ph,'Style','popupmenu', 'String',{'sus','tournament','roul
 %inputbutton = uicontrol(ph,'Style','pushbutton','String','Input','Position',[55 10 70 30],'Callback',@inputbutton_Callback);
 runbutton = uicontrol(ph,'Style','pushbutton','String','START','Position',[0 10 50 30],'Callback',@runbutton_Callback);
 fitness_thresholdv = uicontrol(ph,'Style','edit','String',0.05,'Position',[280 50 50 20],'Callback',@stopcriterion_Callback);
-survivor_select_value = uicontrol(ph,'Style','popupmenu','String',{'Uniform','Elitism','Mu+Lambda','Round-Robin'},'Position',[340 50 50 20],'Callback',@survivorstrategy_Callback);
+survivor_select_value = uicontrol(ph,'Style','popupmenu','String',{'Elitism','Uniform','Mu+Lambda','Round-Robin'},'Position',[340 50 80 20],'Callback',@survivorstrategy_Callback);
 
 set(fh,'Visible','on');
 
@@ -114,9 +118,10 @@ set(fh,'Visible','on');
         dataset_value = get(hObject,'Value');
         dataset = datasets{dataset_value};
         % load the dataset
+        %Switch data scaling
         data = load(['datasets/' dataset]);
-        x=data(:,1)/max([data(:,1);data(:,2)]);y=data(:,2)/max([data(:,1);data(:,2)]);
-        %x=data(:,1);y=data(:,2);
+        %x=data(:,1)/max([data(:,1);data(:,2)]);y=data(:,2)/max([data(:,1);data(:,2)]);
+        x=data(:,1);y=data(:,2);
         NVAR=size(data,1); 
         set(ncitiessliderv,'String',size(data,1));
         axes(ah1);
@@ -191,6 +196,7 @@ set(fh,'Visible','on');
         SELECTION = selections(selection_value);
         SELECTION = SELECTION{1};
     end
+
     function survivorstrategy_Callback(hObject,eventdata)
         selection_value = get(hObject,'Value');
         selections = get(hObject,'String');
@@ -198,17 +204,18 @@ set(fh,'Visible','on');
         SURVIVOR_STR = SURVIVOR_STR{1};
         switch SURVIVOR_STR
             case 'Uniform'
-                SURVIVOR_STR = 0;
+                SURVIVOR_STR_INT = 0;
             case 'Elitism'
-                SURVIVOR_STR = 1;
+                SURVIVOR_STR_INT = 1;
             case 'Mu+Lambda'
-                SURVIVOR_STR = 2;
+                SURVIVOR_STR_INT = 2;
             case 'Round-Robin'
-                SURVIVOR_STR = 3;
+                SURVIVOR_STR_INT = 3;
             otherwise
-                SURVIVOR_STR = 1;
+                SURVIVOR_STR_INT = 1;
         end
     end
+
     function runbutton_Callback(hObject,eventdata)
         %set(ncitiesslider, 'Visible','off');
         set(nindslider,'Visible','off');
@@ -217,7 +224,7 @@ set(fh,'Visible','on');
         set(crossslider,'Visible','off');
         set(elitslider,'Visible','off');
        
-        run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
+        run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR_INT, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
         
         end_run();
     end
