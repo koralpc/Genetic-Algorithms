@@ -18,6 +18,7 @@ for j = 1:size(result_arr,1)
     
     mat_str = cell2mat(cell_holder{j});
     int_str = str2num(mat_str);
+    
     plot(x,int_str);
     hold on;
 end
