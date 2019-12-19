@@ -104,7 +104,7 @@ crosssliderv = uicontrol(ph,'Style','text','String',round(PR_CROSS*100),'Positio
 elitslidertxt = uicontrol(ph,'Style','text','String','% elite','Position',[0 80 130 20]);
 elitslider = uicontrol(ph,'Style','slider','Max',100,'Min',0,'Value',round(ELITIST*100),'Sliderstep',[0.01 0.05],'Position',[130 80 150 20],'Callback',@elitslider_Callback);
 elitsliderv = uicontrol(ph,'Style','text','String',round(ELITIST*100),'Position',[280 80 50 20]);
-crossover = uicontrol(ph,'Style','popupmenu', 'String',{'xalt_edges','pmx'}, 'Value',1,'Position',[10 50 80 20],'Callback',@crossover_Callback);
+crossover = uicontrol(ph,'Style','popupmenu', 'String',{'xalt_edges','pmx','ox'}, 'Value',1,'Position',[10 50 80 20],'Callback',@crossover_Callback);
 mutation = uicontrol(ph,'Style','popupmenu', 'String',{'inversion','interchange','scramble','insertion'}, 'Value',1,'Position',[100 50 80 20],'Callback',@mutation_Callback);
 selection = uicontrol(ph,'Style','popupmenu', 'String',{'sus','tournament','roulette','rankbased'}, 'Value',1,'Position',[190 50 80 20],'Callback',@selection_Callback);
 %inputbutton = uicontrol(ph,'Style','pushbutton','String','Input','Position',[55 10 70 30],'Callback',@inputbutton_Callback);
@@ -226,20 +226,20 @@ set(fh,'Visible','on');
         set(crossslider,'Visible','off');
         set(elitslider,'Visible','off');
        
-        Test_count = 5;
-        min_fit = zeros(1,Test_count);
-        for j = 1 : Test_count
-        min_fit(j) = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR_INT, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
-        end
-        fileID = fopen('../test_results.txt','a');
-        fprintf(fileID,'%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d %d %d %d %d\n', ...
-        DATASET_GLOBAL,num2str(NIND),num2str(MAXGEN), ...
-        MUTATION,num2str(PR_MUT),CROSSOVER,num2str(PR_CROSS),SELECTION,SURVIVOR_STR,num2str(ELITIST), ...
-        num2str(LOCALLOOP),min_fit);
-        fclose(fileID);
-        end_run();
-        figure
-        plotAllResults('../test_results.txt')
+%         Test_count = 5;
+%         min_fit = zeros(1,Test_count);
+%         for j = 1 : Test_count
+             min_fit = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR_INT, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
+%         end
+%         fileID = fopen('../test_results.txt','a');
+%         fprintf(fileID,'%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d %d %d %d %d\n', ...
+%         DATASET_GLOBAL,num2str(NIND),num2str(MAXGEN), ...
+%         MUTATION,num2str(PR_MUT),CROSSOVER,num2str(PR_CROSS),SELECTION,SURVIVOR_STR,num2str(ELITIST), ...
+%         num2str(LOCALLOOP),min_fit);
+%         fclose(fileID);
+         end_run();
+%         figure
+%         plotAllResults('../test_results.txt')
         
     end
 
