@@ -1,8 +1,8 @@
-% OX for TSP
+% E_REC for TSP
 % this crossover assumes that the path representation is used to represent
 % TSP tours
 %
-% Syntax:  NewChrom = ox(OldChrom, XOVR)
+% Syntax:  NewChrom = e_rec(OldChrom, XOVR)
 %
 % Input parameters:
 %    OldChrom  - Matrix containing the chromosomes of the old
@@ -17,7 +17,7 @@
 %                in the same format as OldChrom.
 %
 
-function NewChrom = ox(OldChrom, XOVR)
+function NewChrom = e_rec(OldChrom, XOVR)
 
     if nargin < 2 
         XOVR = NaN; 
@@ -35,8 +35,8 @@ function NewChrom = ox(OldChrom, XOVR)
    % Crossover of the two chromosomes -> results in 2 offsprings
    
 	if rand<XOVR			% recombine with a given probability
-		NewChrom(row,:) = order1_xover([OldChrom(row,:);OldChrom(row+1,:)]);
-		NewChrom(row+1,:)= order1_xover([OldChrom(row+1,:);OldChrom(row,:)]);
+		NewChrom(row,:) = edge_recombin([OldChrom(row,:);OldChrom(row+1,:)]);
+		NewChrom(row+1,:)= edge_recombin([OldChrom(row+1,:);OldChrom(row,:)]);
 	else
 		NewChrom(row,:)=OldChrom(row,:);
 		NewChrom(row+1,:)=OldChrom(row+1,:);
