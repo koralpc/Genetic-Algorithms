@@ -1,5 +1,5 @@
 Dataset_name,Individuals,Gen_count,Mut_str,Mut_count,Xover_str,Xover_count,Parent_str,Survivor_Str,Survivor_count,Loop_detection,All_result
 
-rondrit016.tsp,50,10,inversion,0.05,xalt_edges,0.95,sus,Elitism,0.05,0,1.846480e+03 2.309530e+03
-rondrit016.tsp,50,10,inversion,0.05,xalt_edges,0.95,sus,Elitism,0.05,0,1.939846e+03 2.177446e+03
-rondrit016.tsp,50,10,inversion,0.05,xalt_edges,0.95,sus,Elitism,0.05,0,2.150095e+03 1.787050e+03
+rondrit050.tsp,100,150,inversion,0.9,ox,0.9,tournament,Round-Robin,0.05,0,6.615919e+00 6.551545e+00 6.957796e+00 6.441959e+00 6.194806e+00
+rondrit050.tsp,100,150,scramble,0.9,pmx,0.9,tournament,Mu+Lambda,0.05,0,1.297236e+01 1.158511e+01 1.098528e+01 1.206355e+01 1.167491e+01
+rondrit050.tsp,100,150,interchange,0.9,xalt_edges,0.9,sus,Elitism,0.05,0,1.505166e+01 1.505790e+01 1.617727e+01 1.557301e+01 1.690046e+01

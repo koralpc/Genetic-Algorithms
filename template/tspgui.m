@@ -109,6 +109,7 @@ mutation = uicontrol(ph,'Style','popupmenu', 'String',{'inversion','interchange'
 selection = uicontrol(ph,'Style','popupmenu', 'String',{'sus','tournament','roulette','rankbased'}, 'Value',1,'Position',[190 50 80 20],'Callback',@selection_Callback);
 %inputbutton = uicontrol(ph,'Style','pushbutton','String','Input','Position',[55 10 70 30],'Callback',@inputbutton_Callback);
 runbutton = uicontrol(ph,'Style','pushbutton','String','START','Position',[0 10 50 30],'Callback',@runbutton_Callback);
+nindslidertxt = uicontrol(ph,'Style','text','String','StopC TH','Position',[280 25 50 20]);
 fitness_thresholdv = uicontrol(ph,'Style','edit','String',0.05,'Position',[280 50 50 20],'Callback',@stopcriterion_Callback);
 survivor_select_value = uicontrol(ph,'Style','popupmenu','String',{'Elitism','Uniform','Mu+Lambda','Round-Robin'},'Position',[340 50 80 20],'Callback',@survivorstrategy_Callback);
 
@@ -226,24 +227,25 @@ set(fh,'Visible','on');
         set(crossslider,'Visible','off');
         set(elitslider,'Visible','off');
        
-%%% Uncomment from here for testing a single run
-%         Test_count = 5;
-%         min_fit = zeros(1,Test_count);
-%         for j = 1 : Test_count
-%             min_fit(j) = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR_INT, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
-             
-             min_fit = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR_INT, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
-%         end
-%         fileID = fopen('../test_results.txt','a');
-%         fprintf(fileID,'%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d %d %d %d %d\n', ...
-%         DATASET_GLOBAL,num2str(NIND),num2str(MAXGEN), ...
-%         MUTATION,num2str(PR_MUT),CROSSOVER,num2str(PR_CROSS),SELECTION,SURVIVOR_STR,num2str(ELITIST), ...
-%         num2str(LOCALLOOP),min_fit);
-%         fclose(fileID);
-         end_run();             % Always leave this line uncommented!
-%         figure
-%         plotAllResults('../test_results.txt')
-        
+%%% Uncomment this part for running and plotting a configuration 5 times
+    % Results will be appended to test_results.txt
+%          Test_count = 5;
+%          min_fit = zeros(1,Test_count);
+%          for j = 1 : Test_count
+%      % Use indexed (j) line within the loop!
+%              min_fit(j) = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR_INT, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);    
+               min_fit = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER,MUTATION,SELECTION,SURVIVOR_STR_INT, STOP_THRESHOLD,LOCALLOOP, ah1, ah2, ah3);
+%          end
+%          fileID = fopen('../test_results.txt','a');
+%          fprintf(fileID,'%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d %d %d %d %d\n', ...
+%          DATASET_GLOBAL,num2str(NIND),num2str(MAXGEN), ...
+%          MUTATION,num2str(PR_MUT),CROSSOVER,num2str(PR_CROSS),SELECTION,SURVIVOR_STR,num2str(ELITIST), ...
+%          num2str(LOCALLOOP),min_fit);
+%          fclose(fileID);
+           end_run();             % Always leave this line uncommented!
+%          figure
+%          plotAllResults('../test_results.txt')
+       
     end
 
     function stopcriterion_Callback(hObject,eventdata)
