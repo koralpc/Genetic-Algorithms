@@ -15,10 +15,6 @@
 %                The new population, ready for mating, can be obtained
 %                by calculating OldChrom(NewChrIx,:).
 
-% Author:     Hartmut Pohlheim (Carlos Fonseca)
-% History:    12.12.93     file created
-%             22.02.94     clean up, comments
-
 
 function NewChrIx = roulette(FitnV,Nsel)
 

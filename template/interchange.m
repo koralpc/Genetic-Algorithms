@@ -1,3 +1,10 @@
+% low level interchange function for TSP mutation
+% reciprocal exchange : two random cities in a tour are swapped
+% Representation is an integer specifying which encoding is used
+%	1 : adjacency representation
+%	2 : path representation
+%
+
 function NewChrom = interchange(OldChrom,Representation)
 
 cols=size(OldChrom,2);
@@ -19,10 +26,6 @@ end
 TempChrom = NewChrom(chp1);
 NewChrom(chp1) = NewChrom(chp2);
 NewChrom(chp2) = TempChrom;
-%NewChrom() = NewChrom(rndi(2):-1:rndi(1));
-%buffer=NewChrom(rndi(1));
-%NewChrom(rndi(1))=NewChrom(rndi(2));
-%NewChrom(rndi(2))=buffer;
 
 if Representation==1
 	NewChrom=path2adj(NewChrom);

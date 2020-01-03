@@ -132,7 +132,7 @@ function [Chrom, ObjVCh] = reins(Chrom, SelCh, SUBPOP, InsOpt, ObjVCh, ObjVSel);
              Chrom = [Chrom(selected_parent,:) ; SelCh(selected_child,:)];
              ObjVCh = [ObjVCh(selected_parent) ; ObjVSel(selected_child)];
              return
-         else               % uniform reinsertion
+         else               % Uniform reinsertion
             [Dummy, ChIx] = sort(rand(NIND,1));
          end
          PopIx = ChIx((1:NIns)')+ (irun-1)*NIND;

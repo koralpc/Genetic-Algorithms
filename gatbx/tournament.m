@@ -1,10 +1,10 @@
-%%% Select - Tournament Selection
+%%% Select - Tournament Selection without replacement
 
 function NewChrIx = tournament(FitnV,Nsel);
    % Identify the population size (Nind)
    [Nind,ans] = size(FitnV);
     
-    k = round(Nind / 10); %%Can be also added to gui for better testing
+    k = round(Nind / 10); % Experimentally determined, can be tuned for testing
     NewChrIx = zeros(Nsel,1);
     
     for i = 1:Nsel

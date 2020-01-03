@@ -1,8 +1,5 @@
-% low level function for calculating an offspring
-% given 2 parent in the Parents - agrument
-% Parents is a matrix with 2 rows, each row
-% represent the genocode of the parent
-%
+% Low-level OX function for calculating an offspring
+
 function offspring = order1_xover(Parents)
 	cols=size(Parents,2);
     Parents(1,:) = adj2path(Parents(1,:));

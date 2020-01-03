@@ -1,3 +1,10 @@
+% low level scramble function for TSP mutation
+% reciprocal exchange : two random cities in a tour are swapped
+% Representation is an integer specifying which encoding is used
+%	1 : adjacency representation
+%	2 : path representation
+%
+
 function NewChrom = scramble(OldChrom,Representation)
 
 cols=size(OldChrom,2);
@@ -25,11 +32,6 @@ end
 subset = NewChrom(chp1:chp2);
 subset = subset(randperm(length(subset)));
 NewChrom(chp1:chp2) = subset;
-
-%NewChrom() = NewChrom(rndi(2):-1:rndi(1));
-%buffer=NewChrom(rndi(1));
-%NewChrom(rndi(1))=NewChrom(rndi(2));
-%NewChrom(rndi(2))=buffer;
 
 if Representation==1
 	NewChrom=path2adj(NewChrom);

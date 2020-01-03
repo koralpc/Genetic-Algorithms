@@ -1,6 +1,6 @@
-% roulette.m          (Roulette Wheel Selection)
+% rankbased.m          (Rank Based Selection)
 %
-% This function performs selection with Roulette Wheel Selection.
+% This function performs selection with Rank Based Selection.
 %
 % Syntax:  NewChrIx = sus(FitnV, Nsel)
 %
@@ -15,10 +15,6 @@
 %                The new population, ready for mating, can be obtained
 %                by calculating OldChrom(NewChrIx,:).
 
-% Author:     Hartmut Pohlheim (Carlos Fonseca)
-% History:    12.12.93     file created
-%             22.02.94     clean up, comments
-
 
 function NewChrIx = rankbased(FitnV,Nsel)
 
@@ -29,7 +25,7 @@ function NewChrIx = rankbased(FitnV,Nsel)
    rankV = linspace(1,Nind,Nind);
    cumfit = cumsum(rankV);
    upper_lim = cumfit(Nind);
-% Perform roulette wheel selection
+% Perform rank based selection
     for i = 1:Nsel
        rand_number = upper_lim * rand(1);
        selected_idx = find(cumfit > rand_number);

@@ -1,4 +1,4 @@
-% low level function for TSP mutation
+% low level inversion function for TSP mutation
 % reciprocal exchange : two random cities in a tour are swapped
 % Representation is an integer specifying which encoding is used
 %	1 : adjacency representation

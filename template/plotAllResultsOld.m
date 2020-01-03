@@ -1,3 +1,11 @@
+% Function from plotting all results from a file
+% File is assumed to hold a description header of the configurational meanings in
+% the first row (unused), an empty second row, and parameter values and
+% a number of resulting data in the second row, as seen in
+% test_results.txt, produced by the testing loop implemented in tspgui.m
+
+% To be used with older Matlab versions (<2017)
+
 function plotAllResultsOld(filePath)
 
 table = readtable(filePath);

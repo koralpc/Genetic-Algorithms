@@ -1,3 +1,10 @@
+% low level insertion function for TSP mutation
+% reciprocal exchange : two random cities in a tour are swapped
+% Representation is an integer specifying which encoding is used
+%	1 : adjacency representation
+%	2 : path representation
+%
+
 function NewChrom = insertion(OldChrom,Representation)
 
 cols=size(OldChrom,2);
