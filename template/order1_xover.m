@@ -22,7 +22,17 @@ function offspring = order1_xover(Parents)
         %Parent slice 1 is overwriting slice 2
         parent_slice1 = Parents(1,cp1:cp2);
         parent_slice2 = Parents(2,(~ismember(Parents(2,:),parent_slice1)));
+        
 
+        % Additional step: Start reinsertion from the values at the right side of the sliced part
+
+        % This reduces performance (bad results, slow conv) by quite a lot under any circumstances,
+        % so it was omitted after some experimentation:
+        
+        % if cp2 ~= cols 
+        %     parent_slice2 = circshift(parent_slice2, find(parent_slice2 == Parents(1,cp2+1))+1);
+        % end
+        
         %Overwrite second parents slice
         offspring = [parent_slice2(1:cp1-1), parent_slice1, parent_slice2(cp1:end)];
         offspring = path2adj(offspring);
