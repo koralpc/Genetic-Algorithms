@@ -56,8 +56,12 @@ function min_fit = run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR
             %Chrom(row,:)=randperm(NVAR);
         end
         best=zeros(1,MAXGEN);
+        
         %%%%STOPPING CRITERION%%%%
-        stopping_gen_threshold = MAXGEN/5; %% Play with the value(GUI) 
+        stopping_gen_threshold = MAXGEN/5;
+        if stopping_gen_threshold > 100
+           stopping_gen_threshold = 100; 
+        end
         stop_counter = 0;
         prev_fitness = 0;
         % generational loop

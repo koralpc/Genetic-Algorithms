@@ -4,7 +4,7 @@ function NewChrIx = tournament(FitnV,Nsel);
    % Identify the population size (Nind)
    [Nind,ans] = size(FitnV);
     
-    k = round(Nind / 10); % Experimentally determined, can be tuned for testing
+    k = round(Nind / 10); % Suggested by literature (Eiben), can be tuned for testing
     NewChrIx = zeros(Nsel,1);
     
     for i = 1:Nsel
